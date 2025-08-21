@@ -1,19 +1,23 @@
 class Solution {
 public:
     bool isValid(string s) {
-        stack<char> stack;
-        unordered_map<char, char> mapping = {{')', '('}, {']', '['}, {'}', '{'}};
-
-        for (char c : s) {
-            if (mapping.find(c) == mapping.end()) {
-                stack.push(c);
-            } else if (!stack.empty() && mapping[c] == stack.top()) {
-                stack.pop();
-            } else {
-                return false;
+        stack<char> a;
+        for(char c : s) {
+            if(c == '{' || c == '(' || c == '[') {
+                a.push(c);
+            } 
+            else {
+                if(a.empty()) return false; // nothing to match
+                char top = a.top();
+                a.pop();
+                if((c == ')' && top != '(') ||
+                   (c == '}' && top != '{') ||
+                   (c == ']' && top != '[')) {
+                    return false;
+                }
             }
         }
-
-        return stack.empty();        
+        return a.empty(); // valid only if no unmatched opening
     }
 };
+
