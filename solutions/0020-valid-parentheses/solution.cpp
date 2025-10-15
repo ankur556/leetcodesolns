@@ -1,23 +1,27 @@
+#include <stack>
+#include <string>
+
 class Solution {
 public:
-    bool isValid(string s) {
-        stack<char> a;
-        for(char c : s) {
-            if(c == '{' || c == '(' || c == '[') {
-                a.push(c);
-            } 
-            else {
-                if(a.empty()) return false; // nothing to match
-                char top = a.top();
+    bool isValid(std::string s) {
+        std::stack<char> a;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') {
+                a.push('(');
+            } else if (s[i] == '[') {
+                a.push('[');
+            } else if (s[i] == '{') {
+                a.push('{');
+            } else if (s[i] == ']' && !a.empty() && a.top() == '[') {
                 a.pop();
-                if((c == ')' && top != '(') ||
-                   (c == '}' && top != '{') ||
-                   (c == ']' && top != '[')) {
-                    return false;
-                }
+            } else if (s[i] == '}' && !a.empty() && a.top() == '{') {
+                a.pop();
+            } else if (s[i] == ')' && !a.empty() && a.top() == '(') {
+                a.pop();
+            } else {
+                return false;
             }
         }
-        return a.empty(); // valid only if no unmatched opening
+        return a.empty();
     }
 };
-
