@@ -1,23 +1,24 @@
 class Solution {
 public:
     vector<int> plusOne(vector<int>& digits) {
-        if(digits[digits.size()-1]!=9){digits[digits.size()-1]++;return digits;}
-        else if(digits.size()==1){return {1,0};}
-        else{
-            bool found= false;
+        int no_of_9s=0;
+        for(int i=0;i<digits.size();i++){
+            if(digits[i]==9){no_of_9s++;}
+        }
+        if(no_of_9s==digits.size()){
+            vector<int> ans;
+            ans.push_back(1);
             for(int i=0;i<digits.size();i++){
-                if(digits[digits.size()-i-1]!=9){digits[digits.size()-i-1]++;
-                        for(int j=digits.size()-i;j<digits.size();j++){
-            digits[j]=0;
-        }
-                return digits;found=true;break;}
+                ans.push_back(0);
             }
-        digits[0]=1;digits.push_back(9);
-        for(int i=1;i<digits.size();i++){
-            digits[i]=0;
+            return ans;
         }
-        return digits;
+        else{
+            for(int i=0;i<digits.size();i++){
+                if(digits[digits.size()-i-1]==9){digits[digits.size()-i-1]=0;}
+                else{digits[digits.size()-i-1]=digits[digits.size()-i-1]+1;break;}
+            }
+            return digits;
         }
-return digits;
     }
 };
