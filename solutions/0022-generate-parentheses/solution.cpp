@@ -1,16 +1,26 @@
 class Solution {
 public:
-    void helper(vector<string> & sol,string curr,int open,int close,int n){
-        if(close<open){helper(sol,curr+")",open,close+1,n);}
-        if(open<n){open++;curr.push_back('(');helper(sol,curr,open,close,n);}
-        if(open==n&&close==n){sol.push_back(curr);}
+    void rec(int n, int rem, vector<string>&ans,string & s){
+        if(n==0 && rem==0){
+            ans.push_back(s);
+            return ;
+        }
+        if(n>0){
+            s+='(';
+            rec(n-1,rem+1, ans,s);
+            s.pop_back();
+        }
+        if(rem>0){
+            s+=')';;
+            rec(n,rem-1,ans,s);
+            s.pop_back();
+        }
+
     }
     vector<string> generateParenthesis(int n) {
-        int open=0;
-        int close=0;
-        vector<string> sol;
-        string curr;
-        helper(sol,curr,open,close,n);
-        return sol;
+        vector<string> ans;
+        string s="";
+        rec(n,0,ans,s);
+        return ans;
     }
 };
