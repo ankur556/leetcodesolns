@@ -1,18 +1,23 @@
 class Solution {
 public:
-    int reverse(int x) {
-        int ans = 0; // Initialize the reversed number to 0
-        while (x != 0) {
-            int digit = x % 10; // Get the last digit of x
-            
-            // Check for overflow/underflow before updating ans
-            if ((ans > INT_MAX / 10) || (ans < INT_MIN / 10)) {
-                return 0; // Return 0 if reversing x would cause overflow/underflow
-            }
-            
-            ans = ans * 10 + digit; // Append the digit to the reversed number
-            x = x / 10; // Remove the last digit from x
+    int reverse(int r) {
+        if(r==-2147483648){return 0;}
+        vector<int> a;
+        bool pos=true;
+        if(r<0){pos=false;}
+        long long x=abs(r);
+        while(x>0){
+            a.push_back(x%10);
+            x=x/10;
         }
-        return ans; // Return the reversed number
+        long long sol=0;
+        for(int i=0;i<a.size();i++){
+            sol=sol*10;sol+=a[i];
+        }
+        if (pos && sol > INT_MAX) {return 0;}
+            if (!pos && -sol < INT_MIN){ return 0;
+        }
+        if(pos){return (int)sol;}
+        else{return (int)(-sol);}
     }
 };
