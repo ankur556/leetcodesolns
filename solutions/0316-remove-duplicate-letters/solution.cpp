@@ -1,35 +1,16 @@
 class Solution {
 public:
     string removeDuplicateLetters(string s) {
-        // 1. Count frequency so we know if a char appears "later"
-        vector<int> count(26, 0);
-        for (char c : s) count[c - 'a']++;
-
-        // 2. Keep track if a char is currently in real_ans to avoid duplicates
-        vector<bool> in_result(26, false);
-        string real_ans = "";
-
-        for (char c : s) {
-            // We visited this char, so decrease its remaining count
-            count[c - 'a']--;
-
-            // If we already have this char in our answer, skip it
-            if (in_result[c - 'a']) continue;
-
-            // THE CONDITION TO REMOVE CHARACTERS:
-            // 1. real_ans is not empty
-            // 2. The last char in real_ans is BIGGER than current char 'c'
-            // 3. The last char still has remaining copies later in string (count > 0)
-            while (!real_ans.empty() && real_ans.back() > c && count[real_ans.back() - 'a'] > 0) {
-                in_result[real_ans.back() - 'a'] = false; // Mark removed
-                real_ans.pop_back(); // Remove it
-            }
-
-            // Add the current char
-            real_ans.push_back(c);
-            in_result[c - 'a'] = true;
+              string res = "";
+        int last[26] = {}, seen[26] = {}, n = s.size();
+        for (int i = 0; i < n; ++i)
+            last[s[i] - 'a'] = i;
+        for (int i = 0; i < n; ++i) {
+            if (seen[s[i] - 'a']++) continue;
+            while (!res.empty() && res.back() > s[i] && i < last[res.back() - 'a'])
+                seen[res.back() - 'a'] = 0, res.pop_back();
+            res.push_back(s[i]);
         }
-        
-        return real_ans;
+        return res;  
     }
 };
