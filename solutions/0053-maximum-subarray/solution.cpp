@@ -1,25 +1,29 @@
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int n = nums.size();
-        int sum1 = 0, sum2 = 0, sum3 = INT_MIN;
-        int left = 0, right = n - 1;
-        int max_forward = INT_MIN;
-        sum1 = 0;
-        for (int i = 0; i < n; i++) {
-            sum1 += nums[i];
-            if (sum1 > max_forward) max_forward = sum1;
-            if (sum1 < 0) sum1 = 0;
+        int l=0;
+        int r=nums.size()-1;
+        int sol=-1e7;
+        int sum_l=0;
+        int sum_r=0;
+        for(int i=0;i<nums.size();i++){
+            sum_l+=nums[i];
+            if(sum_l>sol){sol=sum_l;}
+            if(sum_l<0){l=i;sum_l=0;}
         }
-        int max_backward = INT_MIN;
-        sum2 = 0;
-        for (int i = n - 1; i >= 0; i--) {
-            sum2 += nums[i];
-            if (sum2 > max_backward) max_backward = sum2;
-            if (sum2 < 0) sum2 = 0;
+        for(int i=0;i<nums.size()-1;i++){
+            sum_r+=nums[nums.size()-1-i];
+            if(sum_r>sol){sol=sum_r;}
+            if(sum_r<0){r=nums.size()-1-i;sum_r=0;}
         }
-        sum3 = max(max_forward, max_backward);
-        return sum3;
+        int sum_m=0;
+        if(l>r){return sol;}
+        else{
+            for(int i=l;i<r+1;i++){
+                sum_m+=nums[i];
+            }
+            return max(sol,sum_m);
+        }
+
     }
 };
-
