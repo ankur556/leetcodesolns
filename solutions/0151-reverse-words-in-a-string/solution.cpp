@@ -1,32 +1,26 @@
 class Solution {
 public:
     string reverseWords(string s) {
-
-        s = ' ' + s + ' ';
-        
-        vector<int> a;
-        for(int i = 0; i < s.size(); i++){
-            if(s[i] == ' '){
-                a.push_back(i);
-            }
+        vector<string> help;
+        string g;
+        help.push_back(g);
+        for(int i=0;i<s.size();i++){
+            if(s[i]==' '){help.push_back(g);}
+            else{help[help.size()-1].push_back(s[i]);}
         }
-        
-        string ans;
-
-        for(int i = a.size() - 2; i >= 0; i--) {
-
-            if (a[i+1] - a[i] > 1) {
-                
-
-                if (!ans.empty()) {
-                    ans.push_back(' ');
-                }
-
-                for(int j = a[i] + 1; j < a[i+1]; j++) {
-                    ans.push_back(s[j]);
-                }
+        string sol;
+        int cor=0;
+        int k=0;
+        for(int i=0;i<help.size();i++){if(help[i].size()!=0){k=i;}}
+        reverse(help.begin(),help.end());
+        for(int i=0;i<help.size();i++){
+            cor=0;
+            for(int j=0;j<help[i].size();j++){
+                if(help[i][j]!=' '){sol.push_back(help[i][j]);cor++;}
             }
-        }  
-        return ans;
+            if(cor!=0){sol.push_back(' ');}
+        }
+        while(sol[sol.size()-1]==' '){sol.pop_back();}
+        return sol;
     }
 };
