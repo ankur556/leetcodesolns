@@ -9,7 +9,7 @@ public:
         a.push_back(num%7);
         num/=7;
        } 
-       for(int i:a){cout<<i<<endl;  }
+       for(int i:a){cout<<i;}
 
        string s;
        for(int i=0;i<a.size();i++){
