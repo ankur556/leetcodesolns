@@ -1,15 +1,26 @@
 class Solution {
 public:
-    bool isValid(string s) {
-        stack<int> a;
-        for(char c:s){
-            if(c=='('){a.push(c);}
-            else if(c=='{'){a.push(c);}
-            else if(c=='['){a.push(c);}
-            else if(c==')'){if(a.empty()){return false;}else if(a.top()=='('){a.pop();}else{return false;}}
-            else if(c=='}'){if(a.empty()){return false;}else if(a.top()=='{'){a.pop();}else{return false;}}
-            else if(c==']'){if(a.empty()){return false;}else if(a.top()=='['){a.pop();}else{return false;}}
-        }
-        return a.empty();
-    }
+    bool isValid(string s) {
+        stack<char> a;
+        for(char c: s){
+            if(c=='('||c=='['||c=='{'){a.push(c);}
+            else{
+                if(c==')'){
+                    if(a.empty()||a.top()!='('){return false;}
+                    else{a.pop();}
+                }
+                if(c==']'){
+                    if(a.empty()||a.top()!='['){return false;}
+                    else{a.pop();}
+                }
+                if(c=='}'){
+                    if(a.empty()||a.top()!='{'){return false;}
+                    else{a.pop();}
+                }
+            if(!a.empty()){cout<<a.top();}
+            }
+        }
+        return a.empty();
+    }
 };
+
