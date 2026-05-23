@@ -11,9 +11,13 @@
  */
 class Solution {
 public:
-    int maxDepth(TreeNode* root) {
+    int deapt(TreeNode* root){
         if(root==nullptr){return 0;}
-        else if(root->left==nullptr&&root->right==nullptr){return 1;}
-        else{return 1+max(maxDepth(root->left),maxDepth(root->right));}
+        else{
+            return 1+max(deapt(root->right),deapt(root->left));
+        }
+    }
+    int maxDepth(TreeNode* root) {
+        return deapt(root);
     }
 };
