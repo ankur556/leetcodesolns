@@ -11,10 +11,15 @@
  */
 class Solution {
 public:
+    TreeNode* serch(TreeNode* node,int val){
+        if(node==nullptr){return nullptr;}
+        if(node->val==val){return node;}
+        else{
+            if(node->val>val){return serch(node->left,val);}
+            else{return serch(node->right,val);}
+        }
+    }
     TreeNode* searchBST(TreeNode* root, int val) {
-        if(root==nullptr){return nullptr;}
-        else if(val>root->val){return searchBST(root->right,val);}
-        else if(val<root->val){return searchBST(root->left,val);}
-        else{return root;}
+        return serch(root,val);
     }
 };
