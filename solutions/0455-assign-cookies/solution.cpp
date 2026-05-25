@@ -1,13 +1,12 @@
 class Solution {
 public:
     int findContentChildren(vector<int>& g, vector<int>& s) {
+        int gptr=g.size()-1;int sptr=s.size()-1;int sol=0;
         sort(g.begin(),g.end());sort(s.begin(),s.end());
-        int pg=g.size()-1;int ps=s.size()-1;
-        int cnt=0;
-        while(pg>=0&&ps>=0){
-            if(g[pg]>s[ps]){pg--;}
-            else{ps--;pg--;cnt++;}
+        while(gptr>=0&&sptr>=0){
+            if(g[gptr]<=s[sptr]){sol++;gptr--;sptr--;}
+            else{gptr--;}
         }
-        return cnt;
+        return sol;
     }
 };
