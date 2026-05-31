@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
+        int n = nums.size();
+        for(int i=0;i<n-3;i++){
+            if(i>0 && nums[i] == nums[i-1])
+                continue;
+            // 1. Outer Loop Pruning (i level)
+            long long min_possible_sum = 1LL*nums[i]+nums[i+1]+nums[i+2]+nums[i+3];
+            long long max_possible_sum = 1LL*nums[i]+nums[n-1]+nums[n-2]+nums[n-3];
+            // This safely eliminates impossible future searches.
+            if(min_possible_sum > target)
+                break;
+            // This prevents wasting time on hopeless small values.
+            if(max_possible_sum < target)
+                continue;
+            for(int j=i+1;j<n-2;j++){
+                if(j>i+1 && nums[j] == nums[j-1])
+                    continue;
+                // 2. Inner Loop Pruning (j level)
+                // smallest remaining triplet already too large
+                if((1LL*nums[j]+nums[j+1]+nums[j+2]) > (target-nums[i]))
+                    break;
+                // 
+                if((1LL*nums[j]+nums[n-1]+nums[n-2]) < (target-nums[i]))
+                    continue;
+                int s = j+1;
+                int e = n-1;
+                while(s<e){
+                    long long sum = (long long)nums[i] + nums[j] + nums[s] + nums[e];
+                    if(sum == target){
+                        ans.push_back({nums[i],nums[j],nums[s],nums[e]});
+                        s++, e--;
+                        while(s<e && nums[s] == nums[s-1])
+                            s++;
+                        while(s<e && nums[e] == nums[e+1])
+                            e--;
+                    }
+                    else if(sum < target)
+                        s++;
+                    else
+                        e--;
+                }
+            }
+        }
+        return ans;
+    }
+};
