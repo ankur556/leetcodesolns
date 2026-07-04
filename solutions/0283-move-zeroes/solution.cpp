@@ -1,16 +1,14 @@
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
-        if(nums.size()<=1){}
-        else{
-        int left=0;
-        int right=1;
-        while(right<nums.size()){
-            if(nums[left]==0&&nums[right]!=0){swap(nums[left],nums[right]);left++;right++;}
-            else if(nums[left]!=0&&nums[right]!=0){left++;right++;}
-            else if(nums[left]!=0&&nums[right]==0){left++;right++;}
-            else if(nums[left]==0&&nums[right]==0){right++;}
+        int l = 0;
+        // r scans through every element in the array
+        for (int r = 0; r < nums.size(); r++) {
+            // When we find a non-zero, swap it into the 'l' position
+            if (nums[r] != 0) {
+                swap(nums[l], nums[r]);
+                l++; // Move the zero boundary forward
+            }
         }
-
-        }}
+    }
 };
