@@ -26,7 +26,7 @@ public:
         }
         else{}
     }
-    for(int i=0;i<n;i++){if(deg[i]<=0){sol.push_back(i);}}
+    for(int i=0;i<n;i++){if(deg[i]==0){sol.push_back(i);}}
     return sol;
     }
 };
