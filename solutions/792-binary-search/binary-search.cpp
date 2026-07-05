@@ -10,7 +10,7 @@ public:
             else{return mid;}
         }
         // mid=l+(r-l)/2;
-        if(nums[mid]==target){return mid;}
+        //if(nums[mid]==target){return mid;}
         return -1;
     }
 };
