@@ -43,7 +43,7 @@ public:
     }
     ListNode* reverseList(ListNode* head) {
         //the recusive methord works
-       // return recursive(head);
+        return recursive(head);
        //iti methord
        return iti(head);
     }
