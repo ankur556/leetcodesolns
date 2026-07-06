@@ -5,10 +5,10 @@ public:
         int l=0;
         
         if(nums.size()==1){return 0;}
-        else if(nums.size()==2){
+        /*else if(nums.size()==2){
             if(nums[0]>nums[1]){return 0;}
             else{return 1;}
-        }
+        }*/
         if(nums[0]>nums[1]){return 0;}
         if(nums[nums.size()-1]>nums[nums.size()-2]){return nums.size()-1;}
         int mid=l+(r-l)/2;
