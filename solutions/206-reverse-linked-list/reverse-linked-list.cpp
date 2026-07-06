@@ -26,8 +26,25 @@ public:
         temp->next=nullptr;
         return node;
     }
+    ListNode* iti(ListNode*node){
+        ListNode* temp=node;
+        int n=0;
+        while(temp!=nullptr){n++;temp=temp->next;}
+        ListNode * og=node;
+        for(int i=n-1;i>=(n)/2;i--){
+            temp=node;
+            for(int j=0;j<i;j++){
+                temp=temp->next;
+            }
+            swap(og->val,temp->val);
+            og=og->next;
+        }
+        return node;
+    }
     ListNode* reverseList(ListNode* head) {
-        
-        return recursive(head);
+        //the recusive methord works
+       // return recursive(head);
+       //iti methord
+       return iti(head);
     }
 };
