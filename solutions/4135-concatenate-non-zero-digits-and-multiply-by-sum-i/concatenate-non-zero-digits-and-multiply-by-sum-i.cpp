@@ -4,10 +4,8 @@ public:
         long long sum=0;
         long long t=1e9;
         long long val=0;
-        //vector<int> vals;
         while(t>0){
             int c;
-            /// nth term k => 0000'1'324 k%1000=>324 k%10000=>1324 =>nth dig==pow(10,n+1)mod -pow(10,n)mod/pow(10,n)
             if(t>=10){c=(n%(10*t)-n%t)/t;}
             else{c=n%10;}
             if(c){val*=10;val+=c;sum+=c;}
