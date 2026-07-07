@@ -1,26 +1,24 @@
 class Solution {
 public:
-    void rec(int n, int rem, vector<string>&ans,string & s){
-        if(n==0 && rem==0){
-            ans.push_back(s);
-            return ;
+    void helper(vector<string>& sol,string &cur,int pushed,int rpushed,int n){
+        if(pushed==n&&rpushed==n){sol.push_back(cur);return;}
+        if(pushed<n){
+            cur.push_back('(');
+            helper(sol,cur,pushed+1,rpushed,n);
+            cur.pop_back();
         }
-        if(n>0){
-            s+='(';
-            rec(n-1,rem+1, ans,s);
-            s.pop_back();
+        if(rpushed<pushed){
+            cur.push_back(')');
+            helper(sol,cur,pushed,rpushed+1,n);
+            cur.pop_back();
         }
-        if(rem>0){
-            s+=')';;
-            rec(n,rem-1,ans,s);
-            s.pop_back();
-        }
-
     }
     vector<string> generateParenthesis(int n) {
-        vector<string> ans;
-        string s="";
-        rec(n,0,ans,s);
-        return ans;
+        int pushed=0;
+        int rpushed=0;
+        string s;
+        vector<string> sol;
+        helper(sol,s,pushed,rpushed,n);
+        return sol;
     }
 };
