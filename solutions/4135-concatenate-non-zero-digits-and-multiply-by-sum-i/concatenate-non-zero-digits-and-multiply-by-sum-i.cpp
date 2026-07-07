@@ -2,14 +2,17 @@ class Solution {
 public:
     long long sumAndMultiply(int n) {
         long long sum=0;
+        long long t=1e9;
         long long val=0;
-        vector<int> vals;
-        while(n>0){
-            if(n%10){vals.push_back(n%10);sum+=n%10;}
-            n/=10;
-        }
-        for(int i=vals.size()-1;i>=0;i--){
-           val*=10; val+=vals[i];
+        //vector<int> vals;
+        while(t>0){
+            int c;
+            /// nth term k => 0000'1'324 k%1000=>324 k%10000=>1324 =>nth dig==pow(10,n+1)mod -pow(10,n)mod/pow(10,n)
+            if(t>=10){c=(n%(10*t)-n%t)/t;}
+            else{c=n%10;}
+            if(c){val*=10;val+=c;sum+=c;}
+            t/=10;
+            cout<<c<<endl;
         }
         return 1LL*sum*val;
     }
