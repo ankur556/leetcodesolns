@@ -1,11 +1,9 @@
 class Solution {
 public:
     int minBitFlips(int start, int goal) {
-        int sol;
-        int a=start^goal;
-        while(a>0){
-            sol+=a%2;
-            a/=2;
+        int sol=0;
+        while(start>0||goal>0){
+            sol+=((start%2)^(goal%2));start/=2;goal/=2;
         }
         return sol;
     }
