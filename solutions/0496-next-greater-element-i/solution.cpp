@@ -1,36 +1,18 @@
 class Solution {
 public:
     vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
-        int size1 = nums1.size();
-        int size2 = nums2.size();
-        vector<int> posns;  
-
-        for (int i = 0; i < size1; i++) {
-            for (int j = 0; j < size2; j++) {
-                if (nums1[i] == nums2[j]) {
-                    posns.push_back(j);
-                    break;  
-                }
-            }
+        unordered_map<int,int> a;
+        for(int i=0;i<nums2.size();i++){a[nums2[i]]=i;}
+        stack<int> s;
+        for(int i=nums2.size()-1;i>=0;i--){
+            while(!s.empty()&&nums2[i]>s.top()){s.pop();}
+            if(s.empty()){s.push(nums2[i]);nums2[i]=-1;}
+            else{int k=s.top();s.push(nums2[i]);nums2[i]=k;}
         }
-
-        int max_size = size1;
-        vector<int> ans;
-
-        for (int i = 0; i < max_size; i++) {
-            bool found = false;
-            for (int j = posns[i] + 1; j < size2; j++) {
-                if (nums1[i] < nums2[j]) {
-                    ans.push_back(nums2[j]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                ans.push_back(-1);
-            }
+        vector<int> sol;
+        for(int i=0;i<nums1.size();i++){
+            sol.push_back(nums2[a[nums1[i]]]);
         }
-        return ans;
+        return sol;
     }
 };
-
