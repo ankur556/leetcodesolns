@@ -1,21 +1,28 @@
 class Solution {
 public:
-    void helper(vector<int> & nums,vector<vector<int>>& sol,vector<int> & temp,int k){
-        sol.push_back(temp);
-        for(int i=k;i<nums.size();i++){
-            if(i==k){temp.push_back(nums[i]);helper(nums,sol,temp,i+1);temp.pop_back();}
-            else if(nums[i]==nums[i-1]){continue;}
-            else{temp.push_back(nums[i]);helper(nums,sol,temp,i+1);temp.pop_back();}
+    void helper(vector<vector<int>> & sol,int cur,vector<int> & nums,int n,int lp,vector<int> & cv){
+        if(cur>=n){sol.push_back(cv);return;}
+        //if(lp==nums[cur]){}
+        else{
+            cv.push_back(nums[cur]);
+            helper(sol,cur+1,nums,n,lp,cv);
+            cv.pop_back();
+            helper(sol,cur+1,nums,n,lp,cv);
+            return;
         }
-        return;
     }
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
-        vector<vector<int>>sol;
+        vector<vector<int>> sol;
+        int cur=0;
         sort(nums.begin(),nums.end());
-        vector<int> temp;
-
-        int k=0;
-        helper(nums,sol,temp,k);
-        return sol;
+        int lastpushed=10e3;
+        vector<int> cv;
+        helper(sol,cur,nums,nums.size(),lastpushed,cv);
+        map<vector<int>,int> map;
+        vector<vector<int>> acc;
+        for(int i=0;i<sol.size();i++){
+            if(map[sol[i]]==0){acc.push_back(sol[i]);map[sol[i]]=1;}
+        }
+        return acc;
     }
 };
