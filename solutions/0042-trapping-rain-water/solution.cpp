@@ -1,14 +1,16 @@
 class Solution {
 public:
-    int trap(vector<int>& nums) {
-        int max_l=nums[0];int max_r=nums[nums.size()-1];
-        int l=0;int r=nums.size()-1;
+    int trap(vector<int>& height) {
+        int l=0;
+        int r=height.size()-1;
+        int lh=height[0];
+        int rh=height[height.size()-1];
         int sol=0;
         while(l<r){
-            max_l=max(max_l,nums[l]);
-            max_r=max(max_r,nums[r]);
-            if(max_l>=max_r){sol+=(max_r-nums[r]);r--;}
-            else{sol+=(max_l-nums[l]);l++;}
+            lh=max(lh,height[l]);
+            rh=max(rh,height[r]);
+            if(lh<=rh){sol+=(lh-height[l]);l++;}
+            else if(rh<lh){sol+=(rh-height[r]);r--;}
         }
         return sol;
     }
