@@ -1,31 +1,29 @@
 class Solution {
 public:
-    vector<int> asteroidCollision(vector<int>& nums) {
-       stack<int> neg;
-       stack<int> pos;
-       bool r=false;
-       for(int i=nums.size()-1;i>=0;i--){
-        r=false;
-        if(nums[i]<0){
-            neg.push(i);
+    vector<int> asteroidCollision(vector<int>& a) {
+        stack<int> s;
+        vector<int> sol;
+        bool val=false;
+        for(int i=0;i<a.size();i++){
+            if(a[i]>0){s.push(a[i]);}
+            else{
+                val=false;
+                while(!s.empty()&&s.top()<=-a[i]){///equal case not dealt with yet
+                    if(s.top()==(-a[i])){cout<<s.top()<<endl;s.pop();val=true;break;}
+                    else{
+                        s.pop();
+                    }
+                    }
+                    if(s.empty()&&!val){sol.push_back(a[i]);}
+                }
+            }
+            stack<int> t;
+        while(!s.empty()){
+            t.push(s.top());s.pop();
         }
-        else if(nums[i]>0){
-            while(!neg.empty()&&abs(nums[neg.top()])<=nums[i]){
-                if(nums[i]==abs(nums[neg.top()])){neg.pop();r=true;break;}
-                neg.pop();}
-            if(r){continue;}
-            else if(neg.empty()){pos.push(i);}
-            else{continue;}
+        while(!t.empty()){
+            sol.push_back(t.top());t.pop();
         }
-        else{continue;}
-       }
-       vector<int> sol;
-       while(!pos.empty()||!neg.empty()){if(neg.empty()){sol.push_back(pos.top());pos.pop();}
-       else if(pos.empty()){sol.push_back(neg.top());neg.pop();}
-       else if(pos.top()>neg.top()){sol.push_back(neg.top());neg.pop();}
-       else if(pos.top()<neg.top()){sol.push_back(pos.top());pos.pop();}
-      else{sol.push_back(neg.top());neg.pop();}}
-       for(int i=0;i<sol.size();i++){sol[i]=nums[sol[i]];}
-       return sol;
+        return sol;
     }
 };
