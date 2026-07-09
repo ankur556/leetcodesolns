@@ -1,18 +1,18 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        int a=0;
-        int max=0;
-        unordered_map<char,int> last;
-        int cnt=0;
         int st=0;
-        for(char c: s){
-            cnt++;
-            a=cnt;
-            st=std::max(last[c],st);
-            last[c]=cnt;
-            if(max<a-st){max=a-st;}
+        int sol=0;
+        if(s.size()==0){return 0;}
+        unordered_map<char,int> map;
+        for(int i=0;i<s.size();i++){
+            map[s[i]]++;
+            while(map[s[i]]>1){
+                map[s[st]]--;
+                st++;
+            }
+            if(i-st+1>sol){sol=i-st+1;}
         }
-        return max;
+        return sol;
     }
 };
