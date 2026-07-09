@@ -1,23 +1,29 @@
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
-        vector<int> helper;
-        int zero=0;
-        for(int i=0;i<nums.size();i++){
-            if(nums[i]==0){zero++;}
-            helper.push_back(zero);
+        vector<int> zeros;
+        if(!nums.size()){return 0;}
+        int cnt=0;
+        for(int i: nums){
+            cnt+=(1^i);
+            zeros.push_back(cnt);
         }
-        if(helper[helper.size()-1]<=k){return helper.size();}
-        int st=0;
-        int end=k;
-        int max=0;
-        unordered_map<int,int> last;
-        for(int i=0;i<nums.size();i++){
-        if(last[helper[i]]>0){}
-        else{last[helper[i]]=i+1;}
-        if(helper[i]<k+1){if(i+1>max){max=i+1;}}
-        else if(last[helper[i]-k]>0&&i-last[helper[i]-k]+1>max){max=i-last[helper[i]-k]+1;}
-        }
-        return max;
+
+    int st=0;
+    int sol=0;
+    cnt=0;
+    for(int i=0;i<nums.size();i++){
+        //cout<<i<<endl;
+        if(nums[i]==0){cnt++;}
+        if(i+1>sol&&k!=0){sol=i+1;}
+        if(k<=cnt){break;}
+    }
+    for(int i=0;i<nums.size();i++){
+        while((zeros[i]-zeros[st])>k){st++;}
+        if(i-st>sol){sol=i-st;}
+        //cout<<i<<" "<<st<<endl;
+    }
+    if(zeros[zeros.size()-1]<=k){sol=zeros.size();}
+    return sol;
     }
 };
