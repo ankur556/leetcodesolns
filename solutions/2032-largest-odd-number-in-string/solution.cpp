@@ -1,11 +1,15 @@
 class Solution {
 public:
     string largestOddNumber(string num) {
-        int end_idx=0;
-        for(int i=num.size()-1;i>=0;i--){if(num[i]=='1'||num[i]=='3'||num[i]=='5'||num[i]=='7'||num[i]=='9'){end_idx=i+1;break;}}
-        string ans;
-        for(int i=0;i<end_idx;i++){ans.push_back(num[i]);}
-        return ans;
-        
+        int l=0;
+        for(int i=num.size()-1;i>=0;i--){
+            if((num[i]-'0')%2){l=i;break;}
+        }
+        l++;
+        if(l>1){return num.substr(0,l);}
+        else{
+            if((num[0]-'0')%2==0){return "";}
+            else{return num.substr(0,l);}
+        }
     }
 };
