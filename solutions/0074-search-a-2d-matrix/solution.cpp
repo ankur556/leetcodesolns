@@ -1,25 +1,42 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int big=matrix[0].size()-1;
-        int smoll=0;
-        int mid=0;
-        for(int i=0;i<matrix.size();i++){
-            big=matrix[0].size()-1;
-            smoll=0;
-            while(smoll<=big){
-                mid=smoll+(big-smoll)/2;
-                if(target==matrix[i][mid]){return true;}
-                else if(target<matrix[i][mid]){big=mid-1;}
-                else if(target>matrix[i][mid]){smoll=mid+1;}
-                else if(big==smoll+1&&matrix[i][big]!=target&&matrix[i][smoll]!=target){
-                    break;
-                }
-                else if(big==smoll&&matrix[i][big]!=target&&matrix[i][smoll]!=target){
-                    break;
-                }
+        if(matrix.empty() || matrix[0].empty()) {
+            return false;
+        }
+        int l = 0;
+        int r = matrix.size() - 1;
+        
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            
+            if (matrix[mid][0] == target) {
+                return true; 
+            } else if (matrix[mid][0] < target) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
             }
         }
+        if (r < 0) {
+            return false;
+        }
+        int targetRow = r;
+        l = 0;
+        r = matrix[targetRow].size() - 1;
+        
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            
+            if (matrix[targetRow][mid] == target) {
+                return true;
+            } else if (matrix[targetRow][mid] < target) {
+                l = mid + 1;
+            } else {
+                r = mid - 1;
+            }
+        }
+        
         return false;
     }
 };
