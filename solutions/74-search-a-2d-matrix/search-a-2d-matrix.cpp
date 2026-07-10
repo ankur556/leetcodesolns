@@ -4,8 +4,6 @@ public:
         if(matrix.empty() || matrix[0].empty()) {
             return false;
         }
-        
-        // --- 1. First Binary Search: Find the correct row ---
         int l = 0;
         int r = matrix.size() - 1;
         
@@ -20,16 +18,10 @@ public:
                 r = mid - 1;
             }
         }
-        
-        // If r < 0, the target is smaller than the very first element in the matrix
         if (r < 0) {
             return false;
         }
-        
-        // The correct row where our target might exist is now at pointer 'r'
-        int targetRow = r; 
-        
-        // --- 2. Second Binary Search: Search within that specific row ---
+        int targetRow = r;
         l = 0;
         r = matrix[targetRow].size() - 1;
         
