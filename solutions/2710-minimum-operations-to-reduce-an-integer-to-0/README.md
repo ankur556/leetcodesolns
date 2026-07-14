@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/minimum-operations-to-reduce-an-integer-to-0">Minimum Operations to Reduce an Integer to 0</a></h2> <img src='https://img.shields.io/badge/Difficulty-Medium-orange' alt='Difficulty: Medium' /><hr><p>You are given a positive integer <code>n</code>, you can do the following operation <strong>any</strong> number of times:</p>
+<p>You are given a positive integer <code>n</code>, you can do the following operation <strong>any</strong> number of times:</p>
 
 <ul>
 	<li>Add or subtract a <strong>power</strong> of <code>2</code> from <code>n</code>.</li>
