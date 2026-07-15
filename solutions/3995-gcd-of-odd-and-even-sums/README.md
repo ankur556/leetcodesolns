@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/gcd-of-odd-and-even-sums">GCD of Odd and Even Sums</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr><p>You are given an integer <code>n</code>. Your task is to compute the <strong>GCD</strong> (greatest common divisor) of two values:</p>
+<p>You are given an integer <code>n</code>. Your task is to compute the <strong>GCD</strong> (greatest common divisor) of two values:</p>
 
 <ul>
 	<li>
