@@ -11,31 +11,23 @@
 class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
-        if(lists.size()==0){return nullptr;}
         priority_queue<int,vector<int>,greater<int>> pq;
+        ListNode* st;
         for(int i=0;i<lists.size();i++){
-            ListNode* temp=lists[i];
-            while(temp!=nullptr){
-                //cout<<temp->val;
-                pq.push(temp->val);
-                temp=temp->next;
-                //cout<<pq.top()<<endl;
-            }
+            st=lists[i];
+            while(st!=nullptr){/*cout<<st->val<<endl;*/pq.push(st->val);st=st->next;}
         }
-        //vector<ListNode*> sol;
-        //if(sol.size()==0){return nullptr;}
         if(pq.empty()){return nullptr;}
-        ListNode* n=new   ListNode(pq.top());
+        ListNode* solution=new ListNode(pq.top());
+        ListNode* temp=solution;
         pq.pop();
-        ListNode* ne=n;
-        while(!pq.empty()){            
-           // cout<<"no issue wt loop?"<<endl;
-            ListNode* nq=new  ListNode(pq.top());
-            pq.pop();
-            ne->next=nq;
-            ne=nq;
+        while(!pq.empty()){
             cout<<pq.top()<<endl;
+            ListNode* a=new ListNode(pq.top());
+            pq.pop();
+            temp->next=a;
+            temp=temp->next;
         }
-        return n;
+        return solution;
     }
 };
