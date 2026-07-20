@@ -7,10 +7,6 @@ public:
         sort(numdiff.begin(),numdiff.end());
         int sum=0;
         for(int i: reward2){sum+=i;}
-        //cout<<sum<<endl;
-        // correct sum till here issue after this
-        //k=1 nums size==1 start from
-        //loop isnt running
         for(int i=numdiff.size()-k;i<numdiff.size();i++){
             sum+=numdiff[i];
         }
