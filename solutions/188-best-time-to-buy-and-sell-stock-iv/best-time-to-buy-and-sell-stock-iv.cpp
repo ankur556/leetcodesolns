@@ -1,32 +1,27 @@
 class Solution {
 public:
-     vector<vector<vector<int>>> dp;
-    int helper(int i, int b, int tran, vector<int>& prices, int k){
-        if(tran >=k or i>= prices.size()) {
-           return 0;
-        }
-        if(dp[i][tran][b] !=-1) return  dp[i][tran][b];
-        // 1 - b, 0 s
-        if(b){
-           int a = -prices[i] + helper(i+1, 0, tran, prices, k);
-           int c = helper(i+1, 1, tran, prices, k);
-
-            return dp[i][tran][b] = max(a, c);
-
-        }else{
-           int a = prices[i] + helper(i+1, 1 , tran+1, prices, k);
-            int c = helper(i+1, 0, tran, prices, k);
-
-             return dp[i][tran][b] = max(a,c);
-        }
-    }
     int maxProfit(int k, vector<int>& prices) {
-        int n = prices.size();
-        if (n == 0 || k == 0) return 0;
-
-       dp.resize(n,vector<vector<int>>(k+1,vector<int>(2, -1)));
-        helper(0,1,0,prices, k );
-
-        return dp[0][0][1]; 
+        int n=prices.size();
+        if(n==0||k==0){return 0;}
+        if(k>n/2){
+            int maxprofit=0;
+            for(int i=1;i<prices.size();i++){
+                if(prices[i]>prices[i-1]){maxprofit+=(prices[i]-prices[i-1]);}
+            }
+            return maxprofit;
+        }
+        //cout<<"! after this 1"<<endl;
+        //fine till here
+        vector<int> buy(k+1,INT_MIN);
+        vector<int> sell(k+1,0);
+        sell[0]=0;buy[0]=0;
+        for(int p:prices){
+            for(int i=1;i<=k;i++){
+                buy[i]=max(buy[i],sell[i-1]-p);
+                sell[i]=max(sell[i],buy[i]+p);
+            }
+        }
+        //cout<<"! after this 2"<<endl;
+        return sell[k];
     }
 };
