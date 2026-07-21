@@ -22,6 +22,7 @@ public:
     }
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();
+        if (n == 0 || k == 0) return 0;
 
        dp.resize(n,vector<vector<int>>(k+1,vector<int>(2, -1)));
         helper(0,1,0,prices, k );
