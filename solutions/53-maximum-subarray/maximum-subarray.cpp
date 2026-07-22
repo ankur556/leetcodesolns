@@ -6,11 +6,13 @@ public:
         // int lsum=0;
         // int rsum=0;
         int n = nums.size();
-        int cSum=0;
-        int gSum = INT_MIN;
-        for(int i= 0; i<n ; i++){
-            cSum = max(nums[i], cSum+nums[i]);
-            gSum = max(gSum, cSum);
+        int cSum=nums[0];
+        int gSum = nums[0];
+        /// 9 -1 12  => 11 12+8 => 20
+        for(int i= 1; i<n ; i++){
+                if(cSum + nums[i] < nums[i]) cSum = nums[i];
+                else cSum += nums[i];
+            gSum= max( gSum, cSum);
         }
 
         return gSum;
