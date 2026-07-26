@@ -7,10 +7,14 @@ public:
         int rh=height[height.size()-1];
         int sol=0;
         while(l<r){
-            lh=max(lh,height[l]);
-            rh=max(rh,height[r]);
-            if(lh<=rh){sol+=(lh-height[l]);l++;}
-            else if(rh<lh){sol+=(rh-height[r]);r--;}
+            lh=max(height[l],lh);rh=max(height[r],rh);
+            //sol=max(sol,min(height[l],height[r])*r-l);
+            if(lh<rh){
+                sol+=(lh-height[l]);l++;
+            }
+            else if(lh>=rh){
+                sol+=(rh-height[r]);r--;
+            }
         }
         return sol;
     }
