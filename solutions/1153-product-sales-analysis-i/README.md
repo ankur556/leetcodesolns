@@ -1,4 +1,4 @@
-<p>Table: <code>Sales</code></p>
+<h2><a href="https://leetcode.com/problems/product-sales-analysis-i">Product Sales Analysis I</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr><p>Table: <code>Sales</code></p>
 
 <pre>
 +-------------+-------+
