@@ -1,4 +1,4 @@
-<p>Table: <code>Visits</code></p>
+<h2><a href="https://leetcode.com/problems/customer-who-visited-but-did-not-make-any-transactions">Customer Who Visited but Did Not Make Any Transactions</a></h2> <img src='https://img.shields.io/badge/Difficulty-Easy-brightgreen' alt='Difficulty: Easy' /><hr><p>Table: <code>Visits</code></p>
 
 <pre>
 +-------------+---------+
