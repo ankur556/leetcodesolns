@@ -11,16 +11,18 @@
  */
 class Solution {
 public:
-    // helper fxn helps count the val;
-    int sol=0;
-    void helper(TreeNode * a,long long cur){
-        if(a==nullptr)return;
-        if(a->val>=cur){cur=a->val;sol++;}
-        helper(a->right,cur);
-        helper(a->left,cur);
+int good_nodes=0;
+    void helper(TreeNode* root,int val){
+        if(root==nullptr){return ;}
+        else{
+            if(root->val>=val){good_nodes++;}
+            val=max(root->val,val);
+            helper(root->left,val);
+            helper(root->right,val);
+        }
     }
     int goodNodes(TreeNode* root) {
-        helper(root,-1e15);
-        return sol;
+        helper(root,-1e8);
+        return good_nodes;
     }
 };
