@@ -1,9 +1,9 @@
 class Solution {
 public:
     long long fxn(int a1,int b1){
-        long long a=a1;
-        long long b=b1;
-        return (long long)((long long)(a*b)/((long long)pow(gcd(a,b),2)));
+       long long gc=gcd(a1,b1);
+       a1=a1/gc;b1=b1/gc;
+       return 1LL*a1*b1;
     }
     long long maxPairStrength(vector<int>& nums) {
     long long sol=0;
