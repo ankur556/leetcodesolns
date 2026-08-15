@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxDepth(string s) {
+        int cur=0;
+        int sol=0;
+        for(char c : s){
+            if(c=='('){cur++;}
+            else if (c==')'){cur--;}
+            sol=std::max(sol,cur);
+        }
+        return sol;
+    }
+};
