@@ -4,7 +4,7 @@ public:
         // times length is max 6k
         // max 6k edges
         // we can use pq
-        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> pq;
+        priority_queue<vector<int>> pq;
         pq.push({0,k});
         vector<int> vis_time(n+1,-1);
         vis_time[0]=0;vis_time[k]=0;
