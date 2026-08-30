@@ -1,22 +1,20 @@
 class Solution {
 public:
-    bool satisfied(unordered_map<char, int>& windowMap, unordered_map<char, int>& targetMap) {
-    for (auto const& [ch, count] : targetMap) {
-        if (windowMap[ch] < count) {
-            return false;
+    bool satisfied(vector<int>& windowMap,vector<int>& targetMap) {
+        for(int i=0;i<256;i++){
+            if(windowMap[i]<targetMap[i]){return false;}
         }
-    }
     return true;
 }
     string minWindow(string s, string t) {
-        unordered_map<char,int> map;
+        vector<int> map(256);
         for(char c: t){map[c]++;}
-        unordered_map<char,int> mapi;
+        vector<int> mapi(256);
         for(char c:s){mapi[c]++;}
         for(int i=0;i<256;i++){
             if(map[i]>mapi[i]){return "";}
         }
-        unordered_map<char,int> newmap;
+        vector<int> newmap(256);
         int st=0;
         int opst=0;int opend=1e5;
         for(int i=0;i<s.size();i++){
