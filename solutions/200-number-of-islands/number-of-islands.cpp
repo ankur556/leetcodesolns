@@ -13,7 +13,9 @@ public:
                 for(auto a : dirs){
                     int xd=i+a[0];
                     int yd=j+a[1];
-                    if(xd<grid.size()&&xd>=0&&yd>=0&&yd<grid[0].size()&&grid[xd][yd]=='1'){q.push({xd,yd});}
+                    if(xd<grid.size()&&xd>=0&&yd>=0&&yd<grid[0].size()&&grid[xd][yd]=='1'){
+                        if(vis[xd][yd]==0){
+                        q.push({xd,yd});}}
                 }
             }
         }
