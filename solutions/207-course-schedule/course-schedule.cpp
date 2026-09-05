@@ -1,33 +1,36 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-      vector<vector<int>> adj(numCourses);
-      vector<int> indeg(numCourses);
-      vector<int> vis(numCourses);
-      for(int i=0;i<prerequisites.size();i++){
-        adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
-        indeg[prerequisites[i][1]]++;
-      }  
-      queue<int> q;
-      int cnt=0;
-      for(int i=0;i<numCourses;i++){
-        if(indeg[i]==0){q.push(i);vis[i]=1;cnt++;}
-      }
+        vector<vector<int>> adj(numCourses);
+        vector<int> indeg(numCourses);
+        for(auto a : prerequisites){
+            adj[a[1]].push_back(a[0]);
+            indeg[a[0]]++;
+            cout<<a[1]<<adj[a[1]][0]<<endl;
+            //c1
+            //cout<<a[1]<<" "<<a[0]<<" "<<indeg[a[0]]<<endl;
+        }
+        queue<int> q;
+        int vis=0;
+        vector<int> v(numCourses);
+        for(int i=0;i<numCourses;i++){
+            if(indeg[i]==0){q.push(i);vis++;}
+        }
         while(!q.empty()){
-            int a=q.front();
-            //cout<<a<<endl;
+            int t=q.front();
             q.pop();
-            for(int i: adj[a]){
+            //c2
+            //cout<<t<<endl;
+            for(int i : adj[t]){
+                //c3
                 //cout<<i<<endl;
-                //cout<<indeg[i]<<endl;
                 indeg[i]--;
-                if(indeg[i]==0&&vis[i]==0){
-                    vis[i]==1;q.push(i);cnt++;
-                    cout<<"chala"<<endl;
-                }
+                //c4
+                //cout<<i<<" "<<indeg[i]<<endl;
+                if(indeg[i]==0){q.push(i);vis++;}
             }
         }
-        cout<<cnt<<endl;
-        return cnt==numCourses;
+        cout<<vis<<endl;
+        return vis==numCourses;
     }
 };
