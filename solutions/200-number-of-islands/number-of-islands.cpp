@@ -4,6 +4,7 @@ public:
     void bfs(vector<vector<char>> & grid,vector<vector<int>> & vis ,int x ,int y){
         queue<pair<int,int>> q1;
         q1.push({x,y});
+        //vis[x][y]=1;
         while(!q1.empty()){
             int i=q1.front().first;
             int j=q1.front().second;
